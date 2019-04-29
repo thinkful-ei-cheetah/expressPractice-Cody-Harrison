@@ -10,8 +10,15 @@ const app = express();
 app.use(morgan('dev'));
 
 //This is the final request handler
-app.get('/', (req, res) => {
-  res.send('Hello Express!');
+app.get('/sum', (req, res) => {
+  console.log(req.query);
+  const {a,b} = req.query;
+  let aNumber = Number(a);
+  let bNumber = Number(b);
+  const sum = aNumber+bNumber;
+  
+  console.log(aNumber,bNumber);
+  res.status(200).send(`The sum of ${aNumber} + ${bNumber} is ${sum}`);
 });
 
 app.listen(8000, () => {
