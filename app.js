@@ -24,3 +24,15 @@ app.get('/sum', (req, res) => {
 app.listen(8000, () => {
   console.log('Express server is listening on port 8000!');
 });
+
+app.get('/cipher',(req,res)=>{
+  const {text, shift} = req.query;
+  let arr = text.toUpperCase().split('');
+  let num = Number(shift);
+  let numbers = arr.map((a)=>{
+    let base = a.charCodeAt(0)+num;
+    return (base >90 ? base-26:base)
+  });
+  let output = numbers.map(num=>String.fromCharCode(num)).join('');
+  res.status(200).send(`Encoded text: ${output}`);
+})
